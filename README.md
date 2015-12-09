@@ -12,6 +12,7 @@ driver:
   serverplan: 1001
   diskplan: 4
   size_mb: 20480
+  api_zone: tk1a
 
 transport:
   username: root

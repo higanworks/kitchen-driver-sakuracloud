@@ -17,6 +17,7 @@ module Kitchen
         ENV['SAKURACLOUD_API_TOKEN_SECRET']
       end
 
+      default_config :api_zone, nil
       default_config :serverplan, '1001'             # 1 Core 1 GB
       default_config :sourcearchive , "112700955889" #ubuntu14.04
       default_config :sshkey_id do
@@ -82,7 +83,8 @@ module Kitchen
         return @compute if @compute
         @compute = Fog::Compute::SakuraCloud.new(
           sakuracloud_api_token: config[:api_token],
-          sakuracloud_api_token_secret: config[:api_token_secret]
+          sakuracloud_api_token_secret: config[:api_token_secret],
+          api_zone: config[:api_zone]
         )
         @compute
       end
