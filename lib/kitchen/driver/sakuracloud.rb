@@ -50,10 +50,6 @@ module Kitchen
           },
           :boot => true
         )
-        rescue Excon::Errors::HTTPStatusError => e
-          logger.error JSON.parse(e.response.body)
-          raise e
-        end
         server
       end
 
