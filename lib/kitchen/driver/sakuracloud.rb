@@ -38,16 +38,11 @@ module Kitchen
 
       def create_server
         raise Kitchen::ActionFailed "" unless config[:sshkey_id]
-        begin
         server = compute.servers.create(
           :name  => instance.name,
           :sshkey => config[:sshkey_id],
           :serverplan => config[:serverplan],
-          :volume => {
-            :diskplan => config[:diskplan],
-            :size_mb => config[:size_mb],
-            :sourcearchive => config[:sourcearchive]
-          },
+          :volume => volume_option,
           :boot => true
         )
         server
@@ -83,6 +78,14 @@ module Kitchen
           api_zone: config[:api_zone]
         )
         @compute
+      end
+
+      def volume_option
+          {
+            :diskplan => config[:diskplan],
+            :size_mb => config[:size_mb],
+            :sourcearchive => config[:sourcearchive]
+          }
       end
     end
   end
