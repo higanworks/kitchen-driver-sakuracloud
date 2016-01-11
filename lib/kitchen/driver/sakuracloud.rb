@@ -62,7 +62,7 @@ module Kitchen
             server.reload
           end
 
-          server.delete(true)
+          server.delete(true, server.disks.map {|d| d["ID"]})
         rescue Excon::Errors::HTTPStatusError => e
           logger.error JSON.parse(e.response.body)
           raise e unless e.response.status == 404
